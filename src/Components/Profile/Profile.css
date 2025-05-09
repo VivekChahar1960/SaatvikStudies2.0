@@ -1,0 +1,135 @@
+.profile-page {
+    max-width: 700px; /* Increased max-width for better spacing */
+    margin: 2rem auto;
+    padding: 2.5rem; /* Slightly increased padding */
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff; /* White background for a cleaner look */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle box shadow */
+  }
+  
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  h2, h3 {
+    color: #374151; /* Darker heading color */
+    margin-bottom: 1.2rem;
+  }
+  
+  .form {
+    margin-bottom: 2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: 500; /* Slightly lighter font weight for labels */
+    color: #4b5563; /* Muted label color */
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
+  }
+  
+  .icon {
+    font-size: 1.2rem;
+    color: #6b7280; /* Icon color */
+  }
+  
+  input {
+    padding: 12px; /* Increased padding */
+    font-size: 1rem;
+    border: 1px solid #d1d5db; /* Light gray border */
+    border-radius: 8px; /* More rounded input fields */
+    color: #374151;
+    background-color: #f9fafb; /* Light background for input */
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #3b82f6; /* Focus border color */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25); /* Subtle focus shadow */
+  }
+  
+  button {
+    padding: 12px 20px; /* Increased button padding */
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px; /* More rounded buttons */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out; /* Smooth hover transition */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .edit-button {
+    background-color: #2563eb; /* Blue edit button */
+    color: white;
+  }
+  
+  .edit-button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .save-button {
+    background-color: #10b981; /* Green save button */
+    color: white;
+  }
+  
+  .save-button:hover {
+    background-color: #059669;
+  }
+  
+  .cancel-button {
+    background-color: #ef4444; /* Red cancel button */
+    color: white;
+  }
+  
+  .cancel-button:hover {
+    background-color: #dc2626;
+  }
+  
+  .change-password-button {
+    background-color: #a855f7; /* Purple change password button */
+    color: white;
+    margin-top: 1rem;
+  }
+  
+  .change-password-button:hover {
+    background-color: #8b5cf6;
+  }
+  
+  .update-password-button {
+    background-color: #3b82f6; /* Blue update password button */
+    color: white;
+  }
+  
+  .update-password-button:hover {
+    background-color: #2563eb;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .password-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb; /* Light gray border for password section */
+  }
+  
+  .password-form {
+    margin-top: 1rem;
+  }

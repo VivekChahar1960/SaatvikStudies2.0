@@ -353,6 +353,7 @@ body {
   .user-info {
     align-items: center;
     width: 100%;
+    padding: 0.8rem 0;
   }
 
   .loggedinProfile .dropdown-menu {

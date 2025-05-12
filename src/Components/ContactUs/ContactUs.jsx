@@ -22,9 +22,15 @@ const ContactUs = () => {
             <input type="text" id="name" name="name" required />
           </div>
           <div className="form-group">
-            <label htmlFor="class">Class:</label>
-            <input type="number" id="class" name="class" required />
-          </div>
+  <label htmlFor="class">Class:</label>
+  <select id="class" name="class" className="custom-select" required>
+    <option value="">Select Class</option>
+    {[...Array(12)].map((_, i) => (
+      <option key={i + 1} value={i + 1}>{i + 1}</option>
+    ))}
+  </select>
+</div>
+
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" required />

@@ -8,6 +8,8 @@ import SubjectPage from './Components/SubjectShow/SubjectPage';
 import Profile from './Components/Profile/Profile';
 import ProfilePage from './Components/Profile/Profile';
 import Footer from './Components/Footer/Footer';
+import AboutUs from './Components/AboutUs/AboutUs';
+import ContactUs from './Components/ContactUs/ContactUs';
 
 // Placeholder pages
 const HomePage = () => (
@@ -29,8 +31,11 @@ function App() {
         <Route path='/profile' element={<ProfilePage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/:section/class/:classId" element={<SubjectPage />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/contactUs" element={<ContactUs />} />
+        
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }

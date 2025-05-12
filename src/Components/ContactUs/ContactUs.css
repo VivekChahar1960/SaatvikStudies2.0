@@ -1,0 +1,152 @@
+.contact-us-container {
+    display: flex;
+    padding: 30px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  .reversed-layout {
+    flex-direction: row; /* Form on the left, details on the right */
+  }
+  
+  .contact-details {
+    flex: 1;
+  }
+  
+  .contact-form {
+    flex: 1.2; /* Give the form a bit more visual weight */
+  }
+  
+  .contact-form h2,
+  .contact-details h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left; /* Align headings to the left */
+  }
+  
+  .contact-form p,
+  .contact-details p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: calc(100% - 22px); /* Adjust for padding and border */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .contact-info {
+    margin-bottom: 30px;
+  }
+  
+  .contact-info h3 {
+    margin-top: 0;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .map-container {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  .phone a,.mail a{
+    text-decoration: none;
+    color: #666666;
+   }
+  .contact-info p {
+    margin-bottom: 8px;
+  }
+  
+  .contact-info .address {
+    margin-top: 15px;
+  }
+  
+  /* Responsive layout */
+  @media (max-width: 900px) {
+    .contact-us-container {
+      flex-direction: column; /* Stack on smaller screens */
+    }
+  
+    .reversed-layout {
+      flex-direction: column; /* Keep stacking consistent */
+    }
+  
+    .contact-details,
+    .contact-form {
+      flex: 1;
+      margin-bottom: 30px;
+    }
+  
+    .map-container {
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .contact-form h2,
+    .contact-details h2 {
+      font-size: 24px;
+    }
+  
+    .form-group label {
+      font-size: 14px;
+    }
+  
+    .form-group input,
+    .form-group textarea,
+    .submit-button {
+      font-size: 15px;
+    }
+  }

@@ -63,7 +63,7 @@ const HeroSection = () => {
             {" "}
             {/* Updated class name */}
             <h1>
-              Unlock Your Potential with <span>StudyHub</span>
+              Unlock Your Potential with <span>Saatvik Studies</span>
             </h1>
             <p className="hero-subtitle-expanded">
               {" "}

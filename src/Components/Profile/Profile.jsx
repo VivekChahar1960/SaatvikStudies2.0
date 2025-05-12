@@ -127,6 +127,12 @@ const Profile = () => {
     setOldPassword('');
     setNewPassword('');
   };
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  setTimeout(() => {
+    scrollToTop();
+  }, 10);
 
   return (
     <div className="profile-page">

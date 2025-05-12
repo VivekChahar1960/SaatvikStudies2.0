@@ -374,6 +374,7 @@
 
   .info-card-expanded {
     flex-direction: column;
+    flex: 1 1 60px;
     text-align: center;
     padding: 1.8rem;
     border-radius: 10px; /* Adjust border-radius for smaller screens */

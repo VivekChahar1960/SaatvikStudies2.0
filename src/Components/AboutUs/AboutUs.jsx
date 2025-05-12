@@ -12,47 +12,56 @@ import list from "../../assets/list.png";
 import heir from "../../assets/heirarchy.png";
 
 const AboutUs = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  setTimeout(() => {
+    scrollToTop();
+  }, 10);
   return (
     <div>
-        <div className="main-char">
+      <div className="main-char">
         <p className="heading">WHY SAATVIK STUDY STATION</p>
-      <div className="characteristic">
-        <div className="card">
-          <img src={mic}  alt="char img"></img>
-          <p>This Institute is exclusive for your Fundamental Strengthening</p>
-        </div>
-        <div className="card">
-          <img src={degree} alt="char img"></img>
-          <p>Faculties available are Highly Qualified</p>
-        </div>
-        <div className="card">
-          <img src={trophy} alt="char img"></img>
-          <p>Will stand behind you to make you Achieve your Goals</p>
-        </div>
-        <div className="card">
-          <img src={list} alt="char img"></img>
-          <p>Step by Step clarification of Topics</p>
-        </div>
-        <div className="card">
-          <img src={book} alt="char img"></img>
-          <p>We will provide the best content available about the topics</p>
-        </div>
-        <div className="card">
-          <img src={heir} alt="char img"></img>
-          <p>Seperate Teams of Experts to provide the Best for you</p>
-        </div>
-        <div className="card">
-          <img src={people} alt="char img"></img>
-          <p>Best Guidance and Problem Solving Sessions</p>
-        </div>
-        <div className="card">
-          <img src={notes} alt="char img"></img>
-          <p>
-            Our Question Bank and Mock Test contains all Previous Year Questions
-          </p>
+        <div className="characteristic">
+          <div className="card">
+            <img src={mic} alt="char img"></img>
+            <p>
+              This Institute is exclusive for your Fundamental Strengthening
+            </p>
+          </div>
+          <div className="card">
+            <img src={degree} alt="char img"></img>
+            <p>Faculties available are Highly Qualified</p>
+          </div>
+          <div className="card">
+            <img src={trophy} alt="char img"></img>
+            <p>Will stand behind you to make you Achieve your Goals</p>
+          </div>
+          <div className="card">
+            <img src={list} alt="char img"></img>
+            <p>Step by Step clarification of Topics</p>
+          </div>
+          <div className="card">
+            <img src={book} alt="char img"></img>
+            <p>We will provide the best content available about the topics</p>
+          </div>
+          <div className="card">
+            <img src={heir} alt="char img"></img>
+            <p>Seperate Teams of Experts to provide the Best for you</p>
+          </div>
+          <div className="card">
+            <img src={people} alt="char img"></img>
+            <p>Best Guidance and Problem Solving Sessions</p>
+          </div>
+          <div className="card">
+            <img src={notes} alt="char img"></img>
+            <p>
+              Our Question Bank and Mock Test contains all Previous Year
+              Questions
+            </p>
+          </div>
         </div>
       </div>
-    </div>
       <div className="about">
         <div className="Aboutus" id="AboutUS">
           <img src={AboutUsImg} alt="about us img" className={`aboutusimg`} />
@@ -103,9 +112,6 @@ const AboutUs = () => {
           />
         </div>
       </div>
-
-      
-
     </div>
   );
 };

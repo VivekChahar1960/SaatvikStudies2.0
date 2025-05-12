@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useRef ,useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import Logo from '../../assets/SaatvikStudiesLogo.png';
@@ -45,8 +45,23 @@ const Navbar = () => {
     setOpenDropdown((prev) => (prev === 'profile' ? null : 'profile'));
   };
 
+  const navRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setOpenDropdown(null);
+        setMobileMenuVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <header className="navbar">
+    <header className="navbar" ref={navRef}>
       <div className="logo-container">
         <Link to="/" onClick={closeMobileMenu}>
           <img src={Logo} alt="Saatvik Studies Logo" className="logo" />

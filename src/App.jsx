@@ -7,6 +7,7 @@ import HeroSection from './Components/HeroSection/HeroSection';
 import SubjectPage from './Components/SubjectShow/SubjectPage';
 import Profile from './Components/Profile/Profile';
 import ProfilePage from './Components/Profile/Profile';
+import Footer from './Components/Footer/Footer';
 
 // Placeholder pages
 const HomePage = () => (
@@ -23,17 +24,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={
-          // <HomePage />
           <HeroSection/>
           } />
         <Route path='/profile' element={<ProfilePage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/:section/class/:classId" element={<SubjectPage />} />
-        {/* <Route path="/chapterwisenotes/class/:classId" element={<ClassPage />} />
-        <Route path="/exercisesolutions/class/:classId" element={<ClassPage />} />
-        <Route path="/mocktest/class/:classId" element={<ClassPage />} /> */}
-
       </Routes>
+      <Footer/>
     </Router>
   );
 }

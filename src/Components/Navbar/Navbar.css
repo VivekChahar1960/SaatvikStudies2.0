@@ -54,6 +54,7 @@ body {
   transform: translateX(0);
   background-color: #e3f2fd;
   gap: 0.2rem;
+    padding: 0.5rem 1rem;
 }
 
 /* Each nav item */
@@ -261,6 +262,11 @@ body {
     overflow-y: auto;
     overflow-x: hidden; /* Prevent horizontal shift */
     z-index: 1000;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-links::-webkit-scrollbar {
+    display: none; 
   }
 
   .nav-links.active {
@@ -332,8 +338,6 @@ body {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    margin-top: auto; /* Push it to the bottom */
-    margin-bottom: 1rem; /* Add some bottom spacing */
   }
 
   .user-info {

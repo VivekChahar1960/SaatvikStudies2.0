@@ -37,7 +37,16 @@ body {
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
 }
+.logo-container img.logo {
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.logo-container img.logo:hover {
+  transform: scale(1.2);
+}
+
 
 /* Nav links container */
 .nav-links {
@@ -47,6 +56,7 @@ body {
   flex-wrap: wrap;
   transition: transform 0.3s ease;
   background-color: #e3f2fd;
+  cursor: pointer;
 }
 
 .nav-links.active {

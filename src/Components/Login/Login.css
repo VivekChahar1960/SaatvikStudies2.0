@@ -90,3 +90,94 @@
     opacity: 1;
   }
 }
+
+
+/* custom select option css */
+
+
+.custom-select-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 8px 0; /* Slightly wider */
+  border-radius: 8px; /* Rounded corners for the wrapper */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.custom-select-trigger {
+  background-color: #fff; /* White background */
+  border: 1px solid #ddd; /* Lighter border */
+  padding: 12px 15px; /* More padding */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px; /* Rounded corners for the trigger */
+  transition: border-color 0.2s ease-in-out;
+}
+
+.custom-select-trigger:hover {
+  border-color: #aaa;
+}
+
+.custom-select-trigger span {
+  font-size: 16px;
+  color: rgb(55, 65, 81);
+  font-weight: 300;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #777;
+  transition: transform 0.2s ease-in-out;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+  border-top-color: #333;
+}
+
+.custom-options {
+  position: absolute;
+  top: calc(100% + 5px); /* Slightly spaced from the trigger */
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+  z-index: 10;
+  display: none;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  overflow: hidden; /* To contain rounded corners of options */
+}
+
+.custom-options.open {
+  display: block;
+}
+
+.custom-option {
+  padding: 12px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  color: rgb(55, 65, 81);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.custom-option:hover {
+  background-color: #f5f5f5; /* Slightly lighter hover */
+  color: #007bff; /* Example hover color */
+}
+
+.custom-option.selected {
+  background-color: #e9ecef; /* Light gray for selected */
+  color: #28a745; /* Example selected color */
+  font-weight: 500;
+}
+
+/* Style the hidden input if needed */
+.custom-select-wrapper input[type="hidden"] {
+  display: none !important;
+}

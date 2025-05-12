@@ -53,6 +53,8 @@ body {
   display: flex;
   transform: translateX(0);
   background-color: #e3f2fd;
+  gap: 0.2rem;
+    padding: 0.5rem 1rem;
 }
 
 /* Each nav item */
@@ -244,32 +246,25 @@ body {
 /* Mobile responsive styles */
 @media (max-width: 1350px) {
   .nav-links {
-    display: flex; /* Ensure it's a flex container */
-    flex-direction: column;
-    width: 80%;
-    max-width: 300px;
-    align-items: flex-start;
-    background-color: #fff;
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
-    gap: 0.2rem;
-    padding: 0.5rem 1rem;
+    width: 80%;
+    max-width: 320px;
+    background-color: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
     box-shadow: -6px 0 12px rgba(0, 0, 0, 0.08);
-    z-index: 1000;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     overflow-y: auto;
-    /* Add these flexbox properties */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distribute space between items */
+    overflow-x: hidden; /* Prevent horizontal shift */
+    z-index: 1000;
   }
 
   .nav-links.active {
-    gap: 0.2rem;
-    padding: 0.5rem 1rem;
     transform: translateX(0);
   }
 
@@ -309,19 +304,13 @@ body {
 
   .nav-item .dropdown-content {
     position: static;
-    box-shadow: none;
-    border-radius: 0;
     width: 100%;
-    transform: translateY(0);
-    opacity: 1;
-    padding-left: 1.5rem;
-    overflow-y: auto;
-    max-height: none;
     background-color: transparent;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
+    padding-left: 1.2rem;
+    overflow-y: auto;
+    max-height: 300px; /* limit height for scrollability */
   }
-
+  
   .nav-item .dropdown-content.active {
     border-left: 2px solid #2196f3;
     padding-left: 1rem;
@@ -377,5 +366,13 @@ body {
     padding: 0.7rem 0;
     width: 100%;
     border-radius: 0;
+  }
+  .nav-links::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .nav-links::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 4px;
   }
 }

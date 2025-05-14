@@ -49,6 +49,12 @@ const features = [
 ];
 
 const HeroSection = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  setTimeout(() => {
+    scrollToTop();
+  }, 10);
   return (
     <section className="hero-section-expanded">
       {" "}
@@ -152,10 +158,8 @@ const HeroSection = () => {
                   Discover our mission to empower students with quality
                   educational resources and personalized learning experiences.
                 </p>
-                <Link to={"/aboutus"}>
-                <a href="" className="info-link-expanded">
-                  Read Our Story <FaArrowRight />
-                </a>{" "}
+                <Link to={"/aboutus"} className="info-link-expanded">
+                  Read Our Story <FaArrowRight />{" "}
                 </Link>
               </div>
             </div>
@@ -180,12 +184,9 @@ const HeroSection = () => {
                   Have questions or need assistance? Our dedicated support team
                   is here to help you on your learning journey.
                 </p>
-                <Link to={"/contactUs"}>
-                <a href="" className="info-link-expanded">
-                  Contact Us Today <FaPhoneAlt />
-                </a>{" "}
+                <Link to={"/contactUs"} className="info-link-expanded">
+                  Contact Us Today <FaPhoneAlt />{" "}
                 </Link>
-                {/* Updated class name */}
               </div>
             </div>
           </div>

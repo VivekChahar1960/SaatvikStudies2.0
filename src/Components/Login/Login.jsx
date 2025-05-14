@@ -133,7 +133,12 @@ const Login = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownRef]);
-
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  setTimeout(() => {
+    scrollToTop();
+  }, 10);
   return (
     <div className="auth-container">
       <form

@@ -1,13 +1,18 @@
-import React from "react";
-import "./ContactUs.css"; // Import the CSS file
+import React, { useEffect, useState } from "react";
+import "./ContactUs.css";
 
 const ContactUs = () => {
-  const scrollToTop = () => {
+  const [formData, setFormData] = useState({ class: "" });
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const handleCustomSelect = (value) => {
+    setFormData({ ...formData, class: String(value) });
+    setIsDropdownOpen(false);
   };
-  setTimeout(() => {
-    scrollToTop();
-  }, 10);
 
   return (
     <div className="contact-us-container reversed-layout">
@@ -21,15 +26,36 @@ const ContactUs = () => {
             <label htmlFor="name">Name:</label>
             <input type="text" id="name" name="name" required />
           </div>
+
           <div className="form-group">
-  <label htmlFor="class">Class:</label>
-  <select id="class" name="class" className="custom-select" required>
-    <option value="">Select Class</option>
-    {[...Array(12)].map((_, i) => (
-      <option key={i + 1} value={i + 1}>{i + 1}</option>
-    ))}
-  </select>
-</div>
+            <label htmlFor="class">Class:</label>
+            <div
+              className="custom-select-wrapper"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <div className="custom-select-display">
+                {formData.class ? `Class ${formData.class}` : "Select Class"}
+              </div>
+              <div
+                className={`custom-options ${isDropdownOpen ? "open" : ""}`}
+              >
+                {[...Array(12)].map((_, i) => (
+                  <div
+                    key={i + 1}
+                    onClick={() => handleCustomSelect(i + 1)}
+                    className={`custom-option ${
+                      formData.class === String(i + 1) ? "selected" : ""
+                    }`}
+                    data-value={i + 1}
+                  >
+                    Class {i + 1}
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Hidden input for form submission */}
+            <input type="hidden" name="class" value={formData.class} required />
+          </div>
 
           <div className="form-group">
             <label htmlFor="email">Email:</label>
@@ -51,10 +77,8 @@ const ContactUs = () => {
 
       <div className="contact-details">
         <h2>Get in Touch</h2>
-        <p>
-          We'd love to hear from you! Feel free to reach out using the details
-          below.
-        </p>
+        <p>We'd love to hear from you! Feel free to reach out using the details below.</p>
+
         <div className="contact-info">
           <h3>Our Location</h3>
           <div className="map-container">
@@ -70,9 +94,10 @@ const ContactUs = () => {
             ></iframe>
           </div>
           <p className="address">
-            <strong>Address:</strong> 400 , SultanPur Dabas , N-delhi 110039
+            <strong>Address:</strong> 400, SultanPur Dabas, N-delhi 110039
           </p>
         </div>
+
         <div className="contact-info">
           <h3>Contact Information</h3>
           <p className="mail">

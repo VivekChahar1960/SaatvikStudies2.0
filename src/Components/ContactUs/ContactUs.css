@@ -112,32 +112,55 @@
   .contact-info .address {
     margin-top: 15px;
   }
-  .custom-select {
+  .custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    cursor: pointer;
     width: 100%;
+  }
+  
+  .custom-select-display {
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
     font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999' stroke-width='2'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px;
   }
   
-  .custom-select:hover {
-    border-color: #888;
+  .custom-options {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     background-color: #fff;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 10;
   }
   
-  .custom-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    background-color: #fff;
+  .custom-options.open {
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  
+  .custom-option {
+    padding: 10px 15px;
+    transition: background-color 0.2s;
+  }
+  
+  .custom-option:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .custom-option.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
   
   
   /* Responsive layout */

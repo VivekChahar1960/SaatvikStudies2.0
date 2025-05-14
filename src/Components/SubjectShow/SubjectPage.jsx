@@ -11,7 +11,6 @@ const SubjectPage = () => {
   const [chapters, setChapters] = useState([]);
 
   useEffect(() => {
-    // Reset state when section or class changes
     setSelectedSubject(null);
     setChapters([]);
 
@@ -21,7 +20,7 @@ const SubjectPage = () => {
       const dbRef = ref(db);
 
       try {
-        const snapshot = await get(child(dbRef, `NcertBooks/class ${classId}`));
+        const snapshot = await get(child(dbRef, `${section}/class ${classId}`));
         if (snapshot.exists()) {
           const data = snapshot.val();
           setSubjects(Object.keys(data));
@@ -47,7 +46,7 @@ const SubjectPage = () => {
     const dbRef = ref(db);
 
     try {
-      const snapshot = await get(child(dbRef, `NcertBooks/class ${classId}/${subject}`));
+      const snapshot = await get(child(dbRef, `${section}/class ${classId}/${subject}`));
       if (snapshot.exists()) {
         const data = snapshot.val();
         const formatted = Object.entries(data).map(([key, value]) => ({
@@ -55,9 +54,10 @@ const SubjectPage = () => {
           ...value,
         }));
 
+        // Sort chapters numerically
         formatted.sort((a, b) => {
-          const chapterA = parseInt(a.id.match(/ch(\d+)/)?.[1] || '0', 10);
-          const chapterB = parseInt(b.id.match(/ch(\d+)/)?.[1] || '0', 10);
+          const chapterA = parseInt(a.chapterNumber || '0', 10);
+          const chapterB = parseInt(b.chapterNumber || '0', 10);
           return chapterA - chapterB;
         });
 
@@ -79,12 +79,16 @@ const SubjectPage = () => {
       <div className="header">
         <h1>{section.toUpperCase()} - Class {classId}</h1>
         {selectedSubject && (
-          <button className="back-btn" onClick={() => setSelectedSubject(null)}>⬅ Back to Subjects</button>
+          <button className="back-btn" onClick={() => setSelectedSubject(null)}>
+            ⬅ Back to Subjects
+          </button>
         )}
       </div>
 
       {loading ? (
-        <div className="loader">Loading...</div>
+        <div className="spinner-container">
+        <div className="spinner"></div>
+      </div>
       ) : !selectedSubject ? (
         <div className="subject-grid">
           {subjects.map((subject, index) => (

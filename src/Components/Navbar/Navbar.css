@@ -51,7 +51,7 @@ body {
 /* Nav links container */
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 1rem;
   align-items: center;
   flex-wrap: wrap;
   transition: transform 0.3s ease;
@@ -390,3 +390,6 @@ body {
     border-radius: 4px;
   }
 }
+
+
+

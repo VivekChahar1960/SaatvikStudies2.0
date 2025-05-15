@@ -1,4 +1,4 @@
-import React, { useState ,useRef ,useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import Logo from '../../assets/SaatvikStudiesLogo.png';
@@ -11,6 +11,7 @@ import {
   FaStickyNote,
   FaCheckCircle,
   FaPencilAlt,
+  FaSearch, // Import the search icon
 } from 'react-icons/fa';
 
 const ncertClasses = Array.from({ length: 12 }, (_, i) => `Class ${i + 1}`);
@@ -45,12 +46,16 @@ const Navbar = () => {
     setOpenDropdown((prev) => (prev === 'profile' ? null : 'profile'));
   };
 
+  const closeAllMenus = () => {
+    closeMobileMenu();
+    setOpenDropdown(null);
+  };
+
   const navRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
-        setOpenDropdown(null);
-        setMobileMenuVisible(false);
+        closeAllMenus();
       }
     };
 
@@ -63,7 +68,7 @@ const Navbar = () => {
   return (
     <header className="navbar" ref={navRef}>
       <div className="logo-container">
-        <Link to="/" onClick={closeMobileMenu}>
+        <Link to="/" onClick={closeAllMenus}>
           <img src={Logo} alt="Saatvik Studies Logo" className="logo" />
         </Link>
       </div>
@@ -73,7 +78,9 @@ const Navbar = () => {
       </button>
 
       <nav className={`nav-links ${mobileMenuVisible ? 'active' : ''}`}>
-        <Link className="nav-link home-link" to="/" onClick={closeMobileMenu}>Home</Link>
+        <Link className="nav-link home-link" to="/" onClick={closeAllMenus}>
+          Home
+        </Link>
 
         <div className="nav-item">
           <span className="nav-link" onClick={() => toggleMainDropdown('ncert')}>
@@ -81,7 +88,9 @@ const Navbar = () => {
           </span>
           <div className={`dropdown-content ${openDropdown === 'ncert' ? 'active' : ''}`}>
             {ncertClasses.map((cls, i) => (
-              <Link key={i} to={`/ncertbooks/class/${i + 1}`} onClick={closeMobileMenu}>{cls}</Link>
+              <Link key={i} to={`/ncertbooks/class/${i + 1}`} onClick={closeAllMenus}>
+                {cls}
+              </Link>
             ))}
           </div>
         </div>
@@ -92,7 +101,9 @@ const Navbar = () => {
           </span>
           <div className={`dropdown-content ${openDropdown === 'notes' ? 'active' : ''}`}>
             {seniorClasses.map((cls, i) => (
-              <Link key={i} to={`/chapterwisenotes/class/${i + 7}`} onClick={closeMobileMenu}>{cls}</Link>
+              <Link key={i} to={`/chapterwisenotes/class/${i + 7}`} onClick={closeAllMenus}>
+                {cls}
+              </Link>
             ))}
           </div>
         </div>
@@ -103,7 +114,9 @@ const Navbar = () => {
           </span>
           <div className={`dropdown-content ${openDropdown === 'solutions' ? 'active' : ''}`}>
             {seniorClasses.map((cls, i) => (
-              <Link key={i} to={`/exercisesolutions/class/${i + 7}`} onClick={closeMobileMenu}>{cls}</Link>
+              <Link key={i} to={`/exercisesolutions/class/${i + 7}`} onClick={closeAllMenus}>
+                {cls}
+              </Link>
             ))}
           </div>
         </div>
@@ -114,10 +127,17 @@ const Navbar = () => {
           </span>
           <div className={`dropdown-content ${openDropdown === 'mocktest' ? 'active' : ''}`}>
             {seniorClasses.map((cls, i) => (
-              <Link key={i} to={`/mocktest/class/${i + 7}`} onClick={closeMobileMenu}>{cls}</Link>
+              <Link key={i} to={`/mocktest/class/${i + 7}`} onClick={closeAllMenus}>
+                {cls}
+              </Link>
             ))}
           </div>
         </div>
+
+        {/* Search Icon */}
+        <Link to="/search" className="nav-link search-icon-link" onClick={closeAllMenus}>
+          <FaSearch className="nav-icon" />
+        </Link>
 
         {user ? (
           <div className="loggedinProfile">
@@ -127,15 +147,23 @@ const Navbar = () => {
             </div>
 
             <div className={`dropdown-menu ${openDropdown === 'profile' ? 'active' : ''}`}>
-              <Link to="/profile" className="dropdown-item" onClick={closeMobileMenu}>Profile</Link>
-              <button className="dropdown-item logout-btn" onClick={() => { handleLogout(); closeMobileMenu(); }}>
+              <Link to="/profile" className="dropdown-item" onClick={closeAllMenus}>
+                Profile
+              </Link>
+              <button
+                className="dropdown-item logout-btn"
+                onClick={() => {
+                  handleLogout();
+                  closeAllMenus();
+                }}
+              >
                 Logout
               </button>
             </div>
           </div>
         ) : (
           <Link to="/login" className="login-register-link">
-            <button className="login-btn" onClick={closeMobileMenu}>
+            <button className="login-btn" onClick={closeAllMenus}>
               Login / Register
             </button>
           </Link>

@@ -16,7 +16,7 @@ const AdminUploader = () => {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState("");
 
-  const githubToken = "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"; // development use only
+  const githubToken = import.meta.env.REACT_APP_GITHUB_TOKEN;  // development use only
   const githubUser = "vivekchahar1960";
   const githubRepo = "SSS_Data";
 

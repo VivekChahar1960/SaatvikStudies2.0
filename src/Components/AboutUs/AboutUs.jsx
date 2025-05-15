@@ -64,7 +64,7 @@ const AboutUs = () => {
       </div>
       <div className="about">
         <div className="Aboutus" id="AboutUS">
-          <img src={AboutUsImg} alt="about us img" className={`aboutusimg`} />
+          <img src="https://raw.githubusercontent.com/VivekChahar1960/SSS_Data/main/Aboutus%20Image.png" alt="about us img" className={`aboutusimg`} />
           <div className={`aboutMain`}>
             <p className="mainheadingaboutus">
               <b>SAATVIK STUDY STATION</b>

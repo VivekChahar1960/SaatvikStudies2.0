@@ -11,7 +11,7 @@ import {
   FaStickyNote,
   FaCheckCircle,
   FaPencilAlt,
-  FaSearch, // Import the search icon
+  FaSearch,
 } from 'react-icons/fa';
 
 const ncertClasses = Array.from({ length: 12 }, (_, i) => `Class ${i + 1}`);
@@ -21,7 +21,7 @@ const Navbar = () => {
   const { user, logout } = useUser();
   const navigate = useNavigate();
 
-  const [openDropdown, setOpenDropdown] = useState(null); // Controls all dropdowns including profile
+  const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
 
   const toggleMainDropdown = (key) => {
@@ -34,7 +34,7 @@ const Navbar = () => {
 
   const closeMobileMenu = () => {
     setMobileMenuVisible(false);
-    setOpenDropdown(null); // Close all dropdowns including profile
+    setOpenDropdown(null);
   };
 
   const handleLogout = () => {
@@ -134,7 +134,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Search Icon */}
         <Link to="/search" className="nav-link search-icon-link" onClick={closeAllMenus}>
           <FaSearch className="nav-icon" />
         </Link>
@@ -150,6 +149,14 @@ const Navbar = () => {
               <Link to="/profile" className="dropdown-item" onClick={closeAllMenus}>
                 Profile
               </Link>
+
+              {/* Show Upload link only for selected phone numbers */}
+              {user.phone && ['8700348696', '7303488931'].includes(user.phone) && (
+                <Link to="/adminupload" className="dropdown-item" onClick={closeAllMenus}>
+                  Upload
+                </Link>
+              )}
+
               <button
                 className="dropdown-item logout-btn"
                 onClick={() => {

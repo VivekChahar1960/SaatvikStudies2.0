@@ -18,7 +18,7 @@ const SubjectPage = () => {
       setLoading(true);
       const db = getDatabase();
       const dbRef = ref(db);
-
+      console.log(section,classId)
       try {
         const snapshot = await get(child(dbRef, `${section}/class ${classId}`));
         if (snapshot.exists()) {

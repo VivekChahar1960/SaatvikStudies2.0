@@ -101,33 +101,35 @@ const HeroSection = () => {
           <h2 className="features-heading-expanded">Our Key Features</h2>{" "}
           {/* Updated class name */}
           <div className="features-grid-expanded">
-            {" "}
-            {/* Updated class name */}
-            {features.map((feature, index) => (
-              <a
-                href={feature.link}
-                key={index}
-                className="feature-card-link-expanded"
-              >
-                {" "}
-                {/* Updated class name */}
-                <div className="feature-card-expanded">
-                  {" "}
-                  {/* Updated class name */}
-                  <div className="feature-icon-wrapper-expanded">
-                    {" "}
-                    {/* Updated class name */}
-                    <feature.icon className="feature-icon-expanded" />{" "}
-                    {/* Updated class name */}
-                  </div>
-                  <h3>{feature.title}</h3>
-                  <p>{feature.subtitle}</p>
-                  <span className="feature-link-expanded">Learn More</span>{" "}
-                  {/* Updated class name */}
-                </div>
-              </a>
-            ))}
-          </div>
+  {features.map((feature, index) => {
+    const isMockTests = feature.title.toLowerCase().replace(/\s+/g, "") === "mocktests";
+
+    const content = (
+      <div className="feature-card-expanded" key={index}>
+        <div className="feature-icon-wrapper-expanded">
+          <feature.icon className="feature-icon-expanded" />
+        </div>
+        <h3>{feature.title}</h3>
+        <p>{feature.subtitle}</p>
+        <span className="feature-link-expanded">Learn More</span>
+      </div>
+    );
+
+    return isMockTests ? (
+      content
+    ) : (
+      <Link
+        to="/search"
+        state={{ type: feature.title.toLowerCase().replace(/\s+/g, "") }}
+        key={index}
+        className="feature-card-link-expanded"
+      >
+        {content}
+      </Link>
+    );
+  })}
+</div>
+
         </div>
         <div className="info-sections-container-expanded">
           {" "}

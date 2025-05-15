@@ -163,3 +163,58 @@
       font-size: 0.9em;
     }
   }
+
+
+  .gear-cluster {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 2rem;
+    opacity: 0.2;
+  }
+  
+  .gear {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+    animation: rotateClockwise 5s linear infinite;
+  }
+  
+  .gear-1 {
+    top: 0;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    animation: rotateClockwise 4s linear infinite;
+  }
+  
+  .gear-2 {
+    top: 26px;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    animation: rotateCounterClockwise 5s linear infinite;
+  }
+  
+  .gear-3 {
+    top: 30px;
+    left: 37px;
+    width: 50px;
+    height: 50px;
+    animation: rotateClockwise 6s linear infinite;
+  }
+  
+  @keyframes rotateClockwise {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotateCounterClockwise {
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+  

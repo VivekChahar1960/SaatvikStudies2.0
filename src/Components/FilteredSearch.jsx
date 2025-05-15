@@ -1,29 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { getDatabase, ref, get } from 'firebase/database';
-import './FilteredSearch.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen, faFilter, faSearch, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
+import { getDatabase, ref, get } from "firebase/database";
+import "./FilteredSearch.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import settings from "../assets/settings.png";
+import { useLocation } from "react-router-dom";
+import {
+  faBookOpen,
+  faFilter,
+  faFilePdf,
+} from "@fortawesome/free-solid-svg-icons";
 
 const FilteredSearch = () => {
-  const [selectedClass, setSelectedClass] = useState('');
-  const [selectedType, setSelectedType] = useState('');
-  const [selectedSubject, setSelectedSubject] = useState('');
-  const [chapterSearch, setChapterSearch] = useState('');
+  const location = useLocation();
+  const preselectedType = location.state?.type || "";
+
+  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const [chapterSearch, setChapterSearch] = useState("");
   const [subjectList, setSubjectList] = useState([]);
   const [filteredChapters, setFilteredChapters] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [debounceTimeout, setDebounceTimeout] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
+  // ✅ Set selectedType only once on mount
   useEffect(() => {
-    // Clear subject and type when class changes
-    setSelectedType('');
-    setSelectedSubject('');
+    if (preselectedType) {
+      setSelectedType(preselectedType);
+    }
+  }, []);
+
+  // ✅ Reset subject and chapter results when class or type changes
+  useEffect(() => {
+    setSelectedSubject("");
     setSubjectList([]);
     setFilteredChapters([]);
-    setChapterSearch('');
-  }, [selectedClass]);
+    setChapterSearch("");
+    setHasSearched(false);
+  }, [selectedClass, selectedType]);
 
+  // ✅ Fetch subjects when class and type are selected
   useEffect(() => {
     const fetchSubjects = async () => {
       if (selectedClass && selectedType) {
@@ -39,7 +57,7 @@ const FilteredSearch = () => {
             setSubjectList([]);
           }
         } catch (err) {
-          setError('Failed to load subjects.');
+          setError("Failed to load subjects.");
           console.error("Error fetching subjects:", err);
         } finally {
           setIsLoading(false);
@@ -52,25 +70,42 @@ const FilteredSearch = () => {
     fetchSubjects();
   }, [selectedClass, selectedType]);
 
+  // ✅ Handle chapter input with debounce
   const handleChapterSearchChange = (event) => {
     const newSearchTerm = event.target.value;
     setChapterSearch(newSearchTerm);
+    setHasSearched(false);
 
     if (debounceTimeout) {
       clearTimeout(debounceTimeout);
     }
 
-    setDebounceTimeout(
-      setTimeout(() => {
-        if (selectedClass && selectedSubject && selectedType && newSearchTerm.length > 0) {
-          handleSearch(newSearchTerm);
-        } else {
-          setFilteredChapters([]);
-        }
-      }, 300)
-    );
+    const timeout = setTimeout(() => {
+      if (
+        selectedClass &&
+        selectedSubject &&
+        selectedType &&
+        newSearchTerm.length > 0
+      ) {
+        handleSearch(newSearchTerm);
+      } else {
+        setFilteredChapters([]);
+      }
+    }, 300);
+
+    setDebounceTimeout(timeout);
   };
 
+  // ✅ Cleanup debounce
+  useEffect(() => {
+    return () => {
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+    };
+  }, [debounceTimeout]);
+
+  // ✅ Search chapters
   const handleSearch = async (searchTerm = chapterSearch) => {
     if (!selectedClass || !selectedSubject || !selectedType || !searchTerm) {
       setFilteredChapters([]);
@@ -80,23 +115,27 @@ const FilteredSearch = () => {
     setIsLoading(true);
     setError(null);
     setFilteredChapters([]);
+    setHasSearched(true);
 
     const db = getDatabase();
-    const chapterRef = ref(db, `${selectedType}/class ${selectedClass}/${selectedSubject}`);
+    const chapterRef = ref(
+      db,
+      `${selectedType}/class ${selectedClass}/${selectedSubject}`
+    );
 
     try {
       const snapshot = await get(chapterRef);
       if (snapshot.exists()) {
         const chapters = snapshot.val();
         const results = Object.entries(chapters).filter(([_, val]) =>
-          val.chapterName.toLowerCase().includes(searchTerm.toLowerCase())
+          val.chapterName?.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredChapters(results);
       } else {
         setFilteredChapters([]);
       }
     } catch (err) {
-      setError('Failed to search chapters.');
+      setError("Failed to search chapters.");
       console.error("Error searching chapters:", err);
     } finally {
       setIsLoading(false);
@@ -105,7 +144,11 @@ const FilteredSearch = () => {
 
   return (
     <div className="filtered-search-container">
-      <h2><FontAwesomeIcon icon={faBookOpen} className="mr-2" /> Filtered NCERT Search</h2>
+      <h2>
+        <FontAwesomeIcon icon={faBookOpen} className="mr-2" />
+        Filtered NCERT Search
+      </h2>
+
       <div className="filters">
         <div className="filter-row">
           <div className="input-group">
@@ -113,20 +156,24 @@ const FilteredSearch = () => {
             <select
               id="classSelect"
               value={selectedClass}
-              onChange={(e) => {
-                setSelectedClass(e.target.value);
-              }}
+              onChange={(e) => setSelectedClass(e.target.value)}
             >
               <option value="">Select Class</option>
               {[...Array(12)].map((_, i) => (
-                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
               ))}
             </select>
           </div>
 
           <div className="input-group">
             <label htmlFor="typeSelect">Type:</label>
-            <select id="typeSelect" value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
+            <select
+              id="typeSelect"
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+            >
               <option value="">Select Type</option>
               <option value="ncertbooks">NCERT Books</option>
               <option value="chapterwisenotes">Chapterwise Notes</option>
@@ -144,7 +191,9 @@ const FilteredSearch = () => {
               >
                 <option value="">Select Subject</option>
                 {subjectList.map((subj, i) => (
-                  <option key={i} value={subj}>{subj}</option>
+                  <option key={i} value={subj}>
+                    {subj}
+                  </option>
                 ))}
               </select>
             </div>
@@ -168,18 +217,41 @@ const FilteredSearch = () => {
       {error && <p className="error-message">⚠️ {error}</p>}
 
       <div className="results">
-        {isLoading && <p className="loading-message">⏳ Searching for chapters...</p>}
-        {!isLoading && filteredChapters.length > 0 ? (
+        {isLoading && (
+          <p className="loading-message">⏳ Searching for chapters...</p>
+        )}
+
+        {!isLoading && filteredChapters.length > 0 && (
           <ul>
             {filteredChapters.map(([key, val]) => (
               <li key={key}>
                 <a href={val.fileUrl} target="_blank" rel="noopener noreferrer">
-                  <FontAwesomeIcon icon={faFilePdf} className="mr-2" /> {val.chapterName} ({key})
+                  <FontAwesomeIcon icon={faFilePdf} className="mr-2" />{" "}
+                  {val.chapterName} ({key})
                 </a>
               </li>
             ))}
           </ul>
-        ) : (!isLoading && <p>No results found. <FontAwesomeIcon icon={faFilter} /></p>)}
+        )}
+        {!hasSearched && (
+          <p>
+            ....
+          </p>
+        )}
+        {!isLoading && hasSearched && filteredChapters.length === 0 && (
+          <p>
+            No results found. <FontAwesomeIcon icon={faFilter} />
+          </p>
+        )}
+
+      </div>
+
+      <div className="gear-container">
+        <div className="gear-cluster">
+          <img src={settings} alt="Gear 1" className="gear gear-1" />
+          <img src={settings} alt="Gear 2" className="gear gear-2" />
+          <img src={settings} alt="Gear 3" className="gear gear-3" />
+        </div>
       </div>
     </div>
   );

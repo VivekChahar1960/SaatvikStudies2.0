@@ -7,3 +7,15 @@
   .main-content {
     flex-grow: 1;
   }
+  #scrollProgress {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: #3b82f6; /* Blue */
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+  }
+  

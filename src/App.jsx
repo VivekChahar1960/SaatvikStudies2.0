@@ -12,12 +12,21 @@ import Footer from './Components/Footer/Footer';
 import AboutUs from './Components/AboutUs/AboutUs';
 import ContactUs from './Components/ContactUs/ContactUs';
 import UploadNcertBooksToRTDB from './UploadNcertBooksToRTDB';
+import FilteredSearch from './Components/FilteredSearch';
 
 
 
 function App() {
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    document.getElementById("scrollProgress").style.width = scrollPercent + "%";
+  });
+  
   return (
     <div className="app-wrapper">
+      <div id="scrollProgress"></div>
     <Router>
       <Navbar />
       <main className="main-content">
@@ -31,6 +40,8 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/upload" element={<UploadNcertBooksToRTDB/>} />
+        <Route path="/search" element={<FilteredSearch/>} />
+
       </Routes>
       </main>
       <Footer />

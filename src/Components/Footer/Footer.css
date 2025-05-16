@@ -1,89 +1,50 @@
 .footer {
-  background-color: #f8f8f8;
-  padding: 20px 30px;
-  border-top: 1px solid #eee;
+  text-align: center;
+  padding: 20px;
+  background-color: #333333;
+  color: #fff;
 }
 
-.upper-footer {
+.social-icons {
   display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.hover-scroll-combined {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 15px;
-  gap: 15px;
-}
-
-.footer-left {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: #555;
-  transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-  color: #007bff;
-}
-
-.footer-icon {
-  width: 20px;
-  height: 20px;
-}
-
-.footer-right .scroll-top-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-bottom: 15px;
+  user-select: none;
 }
 
-.footer-right .scroll-top-button:hover {
-  background-color: #0056b3;
+.scroll-arrow {
+  font-size: 24px;
+  margin-bottom: 5px;
+  transition: transform 0.3s ease;
 }
 
-.lower-footer {
-  text-align: center;
-  color: #777;
-  font-size: 0.9em;
-  padding-top: 10px;
+.hover-label {
+  min-height: 20px;
+  font-size: 16px;
+  color: #ccc;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
 }
 
-/* ✅ Responsive Design for Small Devices */
-@media (max-width: 768px) {
-  .upper-footer {
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .footer-left {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .footer-right{
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: end;
-  }
-
-  .footer-right .scroll-top-button {
-    width:fit-content;
-    text-align: center;
-  }
-
-  .footer {
-    padding: 20px;
-  }
+.footer-bottom {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #888;
 }

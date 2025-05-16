@@ -13,12 +13,14 @@ import UploadNcertBooksToRTDB from './UploadNcertBooksToRTDB';
 import FilteredSearch from './Components/FilteredSearch';
 import AdminUploader from './Components/AdminUpload';
 import PreLoadPage from './Components/PreLoadpage.jsx';
+import PreloadPage from './Components/PreLoadpage.jsx';
 
 function App() {
   const allowedPhones = ['8700348696', '7303488931'];
   const phone = localStorage.getItem('phone');
 
   return (
+    <PreloadPage>
     <div className="app-wrapper">
       <Router>
         <Navbar />
@@ -32,7 +34,7 @@ function App() {
             <Route path="/contactUs" element={<ContactUs />} />
             <Route path="/upload" element={<UploadNcertBooksToRTDB />} />
             <Route path="/search" element={<FilteredSearch />} />
-            <Route path="/load" element={<PreLoadPage />} />
+            {/* <Route path="/load" element={<PreLoadPage />} /> */}
 
             {allowedPhones.includes(phone) && (
               <Route path="/adminupload" element={<AdminUploader />} />
@@ -42,6 +44,7 @@ function App() {
         <Footer />
       </Router>
     </div>
+    </PreloadPage>
   );
 }
 

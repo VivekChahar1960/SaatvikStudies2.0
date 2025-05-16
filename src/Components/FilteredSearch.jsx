@@ -246,13 +246,6 @@ const FilteredSearch = () => {
 
       </div>
 
-      <div className="gear-container">
-        <div className="gear-cluster">
-          <img src={settings} alt="Gear 1" className="gear gear-1" />
-          <img src={settings} alt="Gear 2" className="gear gear-2" />
-          <img src={settings} alt="Gear 3" className="gear gear-3" />
-        </div>
-      </div>
     </div>
   );
 };

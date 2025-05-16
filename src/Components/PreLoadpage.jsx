@@ -1,79 +1,71 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-import runningAnimation from "../assets/running.json";
-import SS_logo from "../assets/SS_logo_loading.png";
-import "./PreloadPage.css";
+import loaderAnimation from "../assets/Loader_Lottie.json";
 
-const PreloadPage = () => {
-  const [progress, setProgress] = useState(0);
-  const [loadingDone, setLoadingDone] = useState(false);
-  const requestRef = useRef();
+// Helper to set a short-lived cookie (e.g., 5 minutes)
+const setCookie = (name, value, minutes) => {
+  const expires = new Date(Date.now() + minutes * 60 * 1000).toUTCString();
+  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+};
 
-  // Elegantly animate the progress bar
-  const animateProgress = () => {
-    setProgress((prev) => {
-      if (prev >= 100) {
-        cancelAnimationFrame(requestRef.current);
-        return 100;
-      }
-      const next = prev + 0.6; // Slightly slower for a more graceful feel
-      return next > 100 ? 100 : next;
-    });
-    requestRef.current = requestAnimationFrame(animateProgress);
-  };
+const getCookie = (name) => {
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? match[2] : null;
+};
+
+const PreloadPage = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    requestRef.current = requestAnimationFrame(animateProgress);
-    return () => cancelAnimationFrame(requestRef.current);
+    const hasVisited = getCookie("hasVisited");
+
+    // Always show loader, but skip it if cookie exists
+    if (!hasVisited) {
+      const timer = setTimeout(() => {
+        setFadeOut(true);
+        setTimeout(() => {
+          setLoading(false);
+          setCookie("hasVisited", "true", 5); // valid for 5 minutes
+        }, 500); // fade out duration
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    } else {
+      // Already visited recently
+      setLoading(false);
+    }
   }, []);
 
-  // Introduce a subtle delay before revealing the main content
-  useEffect(() => {
-    if (progress === 100) {
-      const timer = setTimeout(() => setLoadingDone(true), 450); // Increased delay
-      return () => clearTimeout(timer);
-    }
-  }, [progress]);
-
-  if (loadingDone) {
+  if (loading) {
     return (
-      <div className="loading_site-content">
-        <h1 className="loading_main-title">Content Loaded Successfully!</h1>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          height: "100vh",
+          width: "100vw",
+          backgroundColor: "#ffffff",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 9999,
+          opacity: fadeOut ? 0 : 1,
+          transition: "opacity 0.5s ease-out",
+        }}
+      >
+        <Lottie
+          animationData={loaderAnimation}
+          loop
+          autoplay
+          style={{ height: 200, width: 200 }}
+        />
       </div>
     );
   }
 
-  return (
-    <div className="loading_preload-container">
-      <img
-        src={SS_logo}
-        alt="Saatvik Studies Logo"
-        className="loading_logo"
-      />
-
-      <div className="loading_progress-bar-container">
-        <div
-          className="loading_progress-bar"
-          style={{ width: `${progress}%` }}
-        ></div>
-
-        <div
-          className="loading_runner-wrapper"
-          style={{ left: `${progress}%` }}
-        >
-          <Lottie
-            animationData={runningAnimation}
-            loop={true}
-            autoplay={true}
-            style={{ height: 60, width: 60 }} // Slightly larger runner
-          />
-        </div>
-      </div>
-
-      <div className="loading_percentage-text">{Math.floor(progress)}%</div>
-      <div className="loading_status-text">Loading application resources...</div>
-    </div>
-  );
+  return <>{children}</>;
 };
 
 export default PreloadPage;

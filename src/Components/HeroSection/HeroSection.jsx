@@ -1,13 +1,15 @@
 import React from "react";
-import HeroImg from "../../assets/HeroSectionImg.png";
+import study_hero from "../../assets/study_hero.json";
+import { Player } from '@lottiefiles/react-lottie-player'; // OR
+import Lottie from 'lottie-react';
 import "./HeroSection.css";
 import { Link } from "react-router-dom";
 import Ncert from "../../assets/books.png";
 import Notes from "../../assets/notes.png";
 import Solutions from "../../assets/solutions.png";
 import Test from "../../assets/test.png";
-import AboutUs from "../../assets/aboutUs.png";
-import ContactUs from "../../assets/contactUs.png";
+import AboutUs from "../../assets/AboutUs_Lottie.json";
+import ContactUs from "../../assets/ContactUs_Lottie.json";
 import {
   FaArrowRight,
   FaBookOpen,
@@ -87,11 +89,7 @@ const HeroSection = () => {
           <div className="hero-image-wrapper-expanded">
             {" "}
             {/* Updated class name */}
-            <img
-              src={HeroImg}
-              alt="Hero Illustration"
-              className="hero-main-image-expanded"
-            />{" "}
+            <Lottie animationData={study_hero} loop={true} className="hero-animation" />
             {/* Updated class name */}
           </div>
         </div>
@@ -145,11 +143,8 @@ const HeroSection = () => {
               <div className="info-image-wrapper-expanded">
                 {" "}
                 {/* Updated class name */}
-                <img
-                  src={AboutUs}
-                  alt="About Us Illustration"
-                  className="info-image-expanded"
-                />{" "}
+                <Lottie animationData={AboutUs} loop={true} className="lottie_About"/>
+                {" "}
                 {/* Updated class name */}
               </div>
               <div className="info-text-expanded">
@@ -171,11 +166,8 @@ const HeroSection = () => {
               <div className="info-image-wrapper-expanded">
                 {" "}
                 {/* Updated class name */}
-                <img
-                  src={ContactUs}
-                  alt="Contact Us Illustration"
-                  className="info-image-expanded"
-                />{" "}
+                <Lottie animationData={ContactUs} loop={true} className="lottie_Contact"/>
+                {" "}
                 {/* Updated class name */}
               </div>
               <div className="info-text-expanded">

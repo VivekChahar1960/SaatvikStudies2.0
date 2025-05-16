@@ -1,0 +1,94 @@
+.loading_preload-container {
+    position: fixed;
+    inset: 0;
+    background: rgb(53, 53, 53); /* More engaging background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding-bottom: 120px; /* Adjusted padding */
+  }
+
+  .loading_logo {
+    width: 140px; /* Slightly larger logo */
+    height: 140px;
+    margin-bottom: 70px; /* Adjusted margin */
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3)); /* Subtle shadow */
+    z-index: 20;
+    border-radius: 50%;
+  }
+
+  .loading_progress-bar-container {
+    position: relative;
+    width: 65vw; /* Slightly narrower */
+    max-width: 550px; /* Adjusted max width */
+    height: 10px; /* Slightly thinner bar */
+    background-color: rgba(255, 255, 255, 0.2); /* Translucent background */
+    border-radius: 10px; /* More rounded corners */
+    /* overflow: hidden; Remove this line */
+    margin-bottom: 25px; /* Adjusted margin */
+  }
+
+  .loading_progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #6dd5ed, #2193b0); /* Soothing gradient */
+    border-radius: 10px; /* Match container radius */
+    transition: width 0.15s ease-out; /* Smoother, ease-out transition */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+  }
+
+  .loading_runner-wrapper {
+    position: absolute;
+    top: -55px; /* Adjust position */
+    transform: translateX(-50%);
+    width: 60px; /* Match Lottie size */
+    height: 60px;
+    pointer-events: none;
+    z-index: 15;
+    transition: left 0.15s ease-out; /* Keep runner in sync with smoother transition */
+  }
+
+  .loading_percentage-text {
+    color: #ffffff;
+    font-size: 1.6rem; /* Slightly larger text */
+    font-weight: 700; /* More prominent */
+    font-family: "Segoe UI", sans-serif;
+    margin-bottom: 8px; /* Add a little spacing */
+  }
+
+  .loading_status-text {
+    color: rgba(255, 255, 255, 0.8); /* Lighter text */
+    font-size: 1rem;
+    font-style: italic;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  /* Renamed main-content to site-content */
+  .loading_site-content {
+    height: 100vh;
+    background-color: #f0f8ff; /* Light and airy background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Fade in effect */
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .loading_main-title {
+    font-size: 2.8rem; /* More impactful title */
+    font-weight: bold;
+    color: #2c3e50; /* Darker, professional color */
+    font-family: "Segoe UI", sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+  }

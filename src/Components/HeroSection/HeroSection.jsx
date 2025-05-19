@@ -1,15 +1,14 @@
 import React from "react";
-import study_hero from "../../assets/study_hero.json";
-import { Player } from '@lottiefiles/react-lottie-player'; // OR
-import Lottie from 'lottie-react';
+import { Player } from '@lottiefiles/react-lottie-player';
 import "./HeroSection.css";
 import { Link } from "react-router-dom";
 import Ncert from "../../assets/books.png";
 import Notes from "../../assets/notes.png";
 import Solutions from "../../assets/solutions.png";
 import Test from "../../assets/test.png";
-import AboutUs from "../../assets/AboutUs_Lottie.json";
-import ContactUs from "../../assets/ContactUs_Lottie.json";
+import study_hero from "../../assets/study_hero.json";
+import aboutUsImg from "../../assets/aboutUs.png";
+import contactUsImg from "../../assets/contactUs.png";
 import {
   FaArrowRight,
   FaBookOpen,
@@ -51,31 +50,22 @@ const features = [
 ];
 
 const HeroSection = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-  setTimeout(() => {
-    scrollToTop();
-  }, 10);
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 10);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="hero-section-expanded">
-      {" "}
-      {/* Updated class name */}
       <div className="hero-container-expanded">
-        {" "}
-        {/* Updated class name */}
         <div className="hero-content-expanded">
-          {" "}
-          {/* Updated class name */}
           <div className="hero-text-expanded">
-            {" "}
-            {/* Updated class name */}
             <h1>
               Unlock Your Potential with <span>Saatvik Studies</span>
             </h1>
             <p className="hero-subtitle-expanded">
-              {" "}
-              {/* Updated class name */}
               The all-in-one platform for mastering your studies with NCERT
               resources, comprehensive notes, detailed solutions, and
               challenging mock tests.
@@ -87,69 +77,65 @@ const HeroSection = () => {
             </Link>
           </div>
           <div className="hero-image-wrapper-expanded">
-            {" "}
-            {/* Updated class name */}
-            <Lottie animationData={study_hero} loop={true} className="hero-animation" />
-            {/* Updated class name */}
+            <Player
+              autoplay
+              loop
+              src={study_hero}
+              className="hero-animation"
+              speed={1}
+              style={{ width: '100%', height: '100%' }}
+            />
           </div>
         </div>
+
         <div className="features-grid-container-expanded">
-          {" "}
-          {/* Updated class name */}
-          <h2 className="features-heading-expanded">Our Key Features</h2>{" "}
-          {/* Updated class name */}
+          <h2 className="features-heading-expanded">Our Key Features</h2>
           <div className="features-grid-expanded">
-  {features.map((feature, index) => {
-    const isMockTests = feature.title.toLowerCase().replace(/\s+/g, "") === "mocktests";
+            {features.map((feature, index) => {
+              const isMockTests =
+                feature.title.toLowerCase().replace(/\s+/g, "") === "mocktests";
 
-    const content = (
-      <div className="feature-card-expanded" key={index}>
-        <div className="feature-icon-wrapper-expanded">
-          <feature.icon className="feature-icon-expanded" />
+              const content = (
+                <div className="feature-card-expanded" key={index}>
+                  <div className="feature-icon-wrapper-expanded">
+                    <feature.icon className="feature-icon-expanded" />
+                  </div>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.subtitle}</p>
+                  <span className="feature-link-expanded">Learn More</span>
+                </div>
+              );
+
+              return isMockTests ? (
+                content
+              ) : (
+                <Link
+                  to="/search"
+                  state={{ type: feature.title.toLowerCase().replace(/\s+/g, "") }}
+                  key={index}
+                  className="feature-card-link-expanded"
+                >
+                  {content}
+                </Link>
+              );
+            })}
+          </div>
         </div>
-        <h3>{feature.title}</h3>
-        <p>{feature.subtitle}</p>
-        <span className="feature-link-expanded">Learn More</span>
-      </div>
-    );
 
-    return isMockTests ? (
-      content
-    ) : (
-      <Link
-        to="/search"
-        state={{ type: feature.title.toLowerCase().replace(/\s+/g, "") }}
-        key={index}
-        className="feature-card-link-expanded"
-      >
-        {content}
-      </Link>
-    );
-  })}
-</div>
-
-        </div>
         <div className="info-sections-container-expanded">
-          {" "}
-          {/* Updated class name */}
-          <h2 className="info-heading-expanded">Learn More About Us</h2>{" "}
-          {/* Updated class name */}
+          <h2 className="info-heading-expanded">Learn More About Us</h2>
           <div className="info-sections-expanded">
-            {" "}
-            {/* Updated class name */}
+
             <div className="info-card-expanded">
-              {" "}
-              {/* Updated class name */}
               <div className="info-image-wrapper-expanded">
-                {" "}
-                {/* Updated class name */}
-                <Lottie animationData={AboutUs} loop={true} className="lottie_About"/>
-                {" "}
-                {/* Updated class name */}
+                <img
+                  src={aboutUsImg}
+                  alt="About Saatvik Study Station"
+                  className="info-static-image"
+                  style={{ width: '100%', height: 'auto' }}
+                />
               </div>
               <div className="info-text-expanded">
-                {" "}
-                {/* Updated class name */}
                 <h3>About Saatvik Study Station</h3>
                 <p>
                   Discover our mission to empower students with quality
@@ -160,19 +146,17 @@ const HeroSection = () => {
                 </Link>
               </div>
             </div>
+
             <div className="info-card-expanded">
-              {" "}
-              {/* Updated class name */}
               <div className="info-image-wrapper-expanded">
-                {" "}
-                {/* Updated class name */}
-                <Lottie animationData={ContactUs} loop={true} className="lottie_Contact"/>
-                {" "}
-                {/* Updated class name */}
+                <img
+                  src={contactUsImg}
+                  alt="Contact Saatvik Study Station"
+                  className="info-static-image"
+                  style={{ width: '100%', height: 'auto' }}
+                />
               </div>
               <div className="info-text-expanded">
-                {" "}
-                {/* Updated class name */}
                 <h3>Get in Touch</h3>
                 <p>
                   Have questions or need assistance? Our dedicated support team
@@ -183,6 +167,7 @@ const HeroSection = () => {
                 </Link>
               </div>
             </div>
+
           </div>
         </div>
       </div>

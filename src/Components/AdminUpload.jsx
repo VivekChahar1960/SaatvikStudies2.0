@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { getDatabase, ref, set } from "firebase/database";
-import { FaFileUpload, FaBookOpen, FaPencilAlt, FaCheckCircle, FaTimesCircle, FaCloudUploadAlt } from "react-icons/fa";
-import "./AdminUploader.css"; // Import the CSS file
+import {
+  FaFileUpload,
+  FaCloudUploadAlt,
+  FaCheckCircle,
+  FaTimesCircle,
+} from "react-icons/fa";
+import "./AdminUploader.css";
 
 const AdminUploader = () => {
   const db = getDatabase();
@@ -11,14 +16,12 @@ const AdminUploader = () => {
   const [subject, setSubject] = useState("");
   const [chapter, setChapter] = useState("");
   const [chapterName, setChapterName] = useState("");
-  const [type, setType] = useState("ncertbooks"); // or chapterwisenotes
+  const [type, setType] = useState("ncertbooks");
   const [uploading, setUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState("");
 
-  const githubToken = import.meta.env.VITE_APP_GITHUB_TOKEN; 
-  console.log(githubToken);
-   // development use only
+  const githubToken = import.meta.env.VITE_APP_GITHUB_TOKEN;
   const githubUser = "vivekchahar1960";
   const githubRepo = "SSS_Data";
 
@@ -62,7 +65,12 @@ const AdminUploader = () => {
     setUploadError("");
 
     const fileName = file.name;
-    const pathType = type === "ncertbooks" ? "books" : "notes";
+
+    let pathType = "";
+    if (type === "ncertbooks") pathType = "books";
+    else if (type === "chapterwisenotes") pathType = "chapterwisenotes";
+    else if (type === "exercisesolutions") pathType = "exercisesolutions";
+
     const filePath = `class ${classNum}/${pathType}/${subject}/${fileName}`;
 
     try {
@@ -111,7 +119,6 @@ const AdminUploader = () => {
 
       setUploadSuccess(true);
       setUploading(false);
-      // Clear form after successful upload
       setFile(null);
       setClassNum("1");
       setSubject("");
@@ -196,7 +203,7 @@ const AdminUploader = () => {
         <input
           type="text"
           id="chapterName"
-          placeholder="e.g.,मेरी किताब"
+          placeholder="e.g., मेरी किताब"
           value={chapterName}
           onChange={handleInputChange}
           name="chapterName"
@@ -214,12 +221,9 @@ const AdminUploader = () => {
           onChange={handleTypeChange}
           className="input-field input-select"
         >
-          <option value="ncertbooks">
-            NCERT Books
-          </option>
-          <option value="chapterwisenotes">
-            Chapterwise Notes
-          </option>
+          <option value="ncertbooks">NCERT Books</option>
+          <option value="chapterwisenotes">Chapterwise Notes</option>
+          <option value="exercisesolutions">Exercise Solutions</option>
         </select>
       </div>
 

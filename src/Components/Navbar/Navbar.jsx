@@ -211,13 +211,23 @@ const Navbar = () => {
                 ["8700348696", "7303488931"].includes(
                   localStorage.getItem("phone")
                 )) && (
-                <Link
-                  to="/adminupload"
-                  className="dropdown-item"
-                  onClick={closeAllMenus}
-                >
-                  Upload
-                </Link>
+                <>
+                  <Link
+                    to="/adminupload"
+                    className="dropdown-item"
+                    onClick={closeAllMenus}
+                  >
+                    Upload
+                  </Link>
+
+                  <Link
+                    to="/admineditor"
+                    className="dropdown-item"
+                    onClick={closeAllMenus}
+                  >
+                    Edit Metadata
+                  </Link>
+                </>
               )}
 
               <button

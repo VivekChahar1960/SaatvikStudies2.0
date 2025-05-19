@@ -14,6 +14,7 @@ import FilteredSearch from './Components/FilteredSearch';
 import AdminUploader from './Components/AdminUpload';
 import PreLoadPage from './Components/PreLoadpage.jsx';
 import PreloadPage from './Components/PreLoadpage.jsx';
+import AdminEditor from './Components/AdminEditor.jsx';
 
 function App() {
   const allowedPhones = ['8700348696', '7303488931'];
@@ -38,6 +39,9 @@ function App() {
 
             {allowedPhones.includes(phone) && (
               <Route path="/adminupload" element={<AdminUploader />} />
+            )}
+            {allowedPhones.includes(phone) && (
+              <Route path="/admineditor" element={<AdminEditor />} />
             )}
           </Routes>
         </main>

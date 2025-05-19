@@ -1,0 +1,124 @@
+.admin-viewer {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+  }
+  
+  h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-row label {
+    width: 120px;
+    font-weight: bold;
+    color: #555;
+    margin-right: 15px;
+  }
+  
+  .input-row input[type="number"],
+  .input-row input[type="text"],
+  .input-row input[type="file"],
+  .input-row select {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .input-row select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg fill="%23333" viewBox="0 0 4 5"><path d="M2 0L0 2h4L2 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 10px);
+    background-position-y: 50%;
+    background-size: 8px;
+    padding-right: 30px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .message {
+    margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+  
+  .message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  
+  .metadata-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .metadata-section h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .metadata-section p {
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .metadata-section strong {
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+  }
+  
+  .metadata-section a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .metadata-section a:hover {
+    text-decoration: underline;
+  }
+  
+  .metadata-section button {
+    margin-top: 15px;
+  }

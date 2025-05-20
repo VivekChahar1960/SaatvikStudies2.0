@@ -53,6 +53,16 @@ const AdminUploader = () => {
     setType(e.target.value);
   };
 
+  // ✅ Read binary PDF safely as base64
+  const readFileAsBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   const handleUpload = async () => {
     if (!file || !subject || !chapter || !chapterName || !classNum) {
       setUploadError("⚠️ Please fill in all fields and select a file.");
@@ -74,8 +84,8 @@ const AdminUploader = () => {
     const filePath = `class ${classNum}/${pathType}/${subject}/${fileName}`;
 
     try {
-      const fileContent = await file.text();
-      const contentEncoded = btoa(unescape(encodeURIComponent(fileContent)));
+      const base64Content = await readFileAsBase64(file);
+      const contentEncoded = base64Content.split(",")[1]; // Strip `data:application/pdf;base64,`
 
       const githubRes = await fetch(
         `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${filePath}`,

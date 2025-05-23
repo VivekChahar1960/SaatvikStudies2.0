@@ -16,7 +16,7 @@ const AdminUploader = () => {
   const [subject, setSubject] = useState("");
   const [chapter, setChapter] = useState("");
   const [chapterName, setChapterName] = useState("");
-  const [type, setType] = useState("ncertbooks");
+  const [type, setType] = useState("chapterwisenotes"); // Default updated
   const [uploading, setUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState("");
@@ -53,7 +53,6 @@ const AdminUploader = () => {
     setType(e.target.value);
   };
 
-  // ✅ Read binary PDF safely as base64
   const readFileAsBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -77,15 +76,14 @@ const AdminUploader = () => {
     const fileName = file.name;
 
     let pathType = "";
-    if (type === "ncertbooks") pathType = "books";
-    else if (type === "chapterwisenotes") pathType = "chapterwisenotes";
+    if (type === "chapterwisenotes") pathType = "chapterwisenotes";
     else if (type === "exercisesolutions") pathType = "exercisesolutions";
 
     const filePath = `class ${classNum}/${pathType}/${subject}/${fileName}`;
 
     try {
       const base64Content = await readFileAsBase64(file);
-      const contentEncoded = base64Content.split(",")[1]; // Strip `data:application/pdf;base64,`
+      const contentEncoded = base64Content.split(",")[1];
 
       const githubRes = await fetch(
         `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${filePath}`,
@@ -231,7 +229,6 @@ const AdminUploader = () => {
           onChange={handleTypeChange}
           className="input-field input-select"
         >
-          <option value="ncertbooks">NCERT Books</option>
           <option value="chapterwisenotes">Chapterwise Notes</option>
           <option value="exercisesolutions">Exercise Solutions</option>
         </select>

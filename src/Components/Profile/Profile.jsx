@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import { ref, get, update, getDatabase } from 'firebase/database';
 import { useNotification } from '../../Context/NotificationContext';
-import { FiUser, FiMail, FiPhone, FiEdit, FiSave, FiLock, FiCheckCircle, FiXCircle } from 'react-icons/fi'; // Import icons
+import { FiUser, FiMail, FiPhone, FiEdit, FiSave, FiLock, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 
 const Profile = () => {
   const db = getDatabase();
@@ -22,6 +22,10 @@ const Profile = () => {
   const [newPassword, setNewPassword] = useState('');
 
   const phone = localStorage.getItem('phone');
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     if (!phone) return;
@@ -66,16 +70,16 @@ const Profile = () => {
         school: formData.school,
       });
       setIsEditing(false);
-      showNotification('Profile updated successfully!', 'success'); // Added type for styling
+      showNotification('Profile updated successfully!', 'success');
+      scrollToTop();
     } catch (error) {
       console.error(error);
-      showNotification('Error updating profile.', 'error'); // Added type for styling
+      showNotification('Error updating profile.', 'error');
     }
   };
 
   const handleCancelEdit = () => {
     setIsEditing(false);
-    // Optionally, reset form data to the initially fetched values
     const userRef = ref(db, `users/${phone}`);
     get(userRef)
       .then((snapshot) => {
@@ -116,6 +120,7 @@ const Profile = () => {
       setNewPassword('');
       setIsChangingPassword(false);
       showNotification('Password changed successfully!', 'success');
+      scrollToTop();
     } catch (err) {
       console.error(err);
       showNotification('Error updating password.', 'error');
@@ -127,12 +132,6 @@ const Profile = () => {
     setOldPassword('');
     setNewPassword('');
   };
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-  setTimeout(() => {
-    scrollToTop();
-  }, 10);
 
   return (
     <div className="profile-page">
